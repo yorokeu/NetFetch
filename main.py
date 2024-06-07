@@ -30,14 +30,12 @@ class DownloadApp:
         self.stop_flag = False
 
     def create_widgets(self):
-        # Create main frames
         self.frame_top = ttk.Frame(self.root, padding="10 10 10 10")
         self.frame_top.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
         self.frame_bottom = ttk.Frame(self.root, padding="10 10 10 10")
         self.frame_bottom.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-        # Configure top frame
         self.url_label = ttk.Label(self.frame_top, text="Enter URL:")
         self.url_label.grid(row=0, column=0, sticky=tk.W, padx=5, pady=5)
 
@@ -59,7 +57,6 @@ class DownloadApp:
         self.cancel_button = ttk.Button(self.frame_top, text="Cancel", command=self.cancel_download, state=tk.DISABLED)
         self.cancel_button.grid(row=3, column=2, padx=5, pady=5, sticky=tk.W)
 
-        # Configure bottom frame
         self.details_label = ttk.Label(self.frame_bottom, text="Details:")
         self.details_label.grid(row=0, column=0, sticky=tk.W, padx=5, pady=5)
 
@@ -113,8 +110,7 @@ class DownloadApp:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         }
-        
-        # طلب بيانات الملف والتحقق من حالة الاستجابة
+
         r = requests.get(url, headers=headers, stream=True)
         if r.status_code == 403:
             self.status_label.config(text="Error: Access forbidden (403).")
@@ -181,7 +177,6 @@ class DownloadApp:
             f"Resume capability: Yes"
         ))
 
-        # Update tree view
         self.tree.insert('', 'end', values=(block_num + 1, self.human_readable_size(wrote), "Receiving data..."))
 
     def human_readable_size(self, size):
